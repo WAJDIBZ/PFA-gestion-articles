@@ -10,6 +10,7 @@ public class ArticleConfiguration : IEntityTypeConfiguration<Article>
     {
         builder.Property(a => a.Reference).IsRequired().HasMaxLength(100);
         builder.Property(a => a.Designation).IsRequired().HasMaxLength(250);
+        builder.Property(a => a.ImageUrl).HasMaxLength(500);
         builder.Property(a => a.PrixAchat).HasColumnType("numeric(18,2)");
         builder.Property(a => a.PrixVente).HasColumnType("numeric(18,2)");
         builder.HasIndex(a => a.Reference).IsUnique();

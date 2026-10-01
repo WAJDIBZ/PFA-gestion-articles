@@ -9,6 +9,7 @@ public class Article : BaseEntity
     public string Designation { get; set; } = string.Empty;
     public string? Description { get; set; }
     public string? CodeBarre { get; set; }
+    public string? ImageUrl { get; set; }
 
     public Guid FamilleId { get; set; }
     public Famille Famille { get; set; } = null!;

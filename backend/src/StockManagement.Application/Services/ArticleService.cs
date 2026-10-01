@@ -27,7 +27,7 @@ public class ArticleService(IUnitOfWork uow) : IArticleService
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .Select(a => new ArticleDto(
-                a.Id, a.Reference, a.Designation, a.Description, a.CodeBarre,
+                a.Id, a.Reference, a.Designation, a.Description, a.CodeBarre, a.ImageUrl,
                 a.FamilleId, a.Famille.Nom, a.MarqueId, a.Marque != null ? a.Marque.Nom : null,
                 a.UniteId, a.Unite.Nom, a.ModeSuivi, a.GereVariantes, a.SuiviDatePeremption,
                 a.PrixAchat, a.PrixVente, a.SeuilMinimum, a.EstActif,
@@ -41,7 +41,7 @@ public class ArticleService(IUnitOfWork uow) : IArticleService
     {
         return await uow.Articles.Query().Where(a => a.Id == id && !a.EstSupprime)
             .Select(a => new ArticleDto(
-                a.Id, a.Reference, a.Designation, a.Description, a.CodeBarre,
+                a.Id, a.Reference, a.Designation, a.Description, a.CodeBarre, a.ImageUrl,
                 a.FamilleId, a.Famille.Nom, a.MarqueId, a.Marque != null ? a.Marque.Nom : null,
                 a.UniteId, a.Unite.Nom, a.ModeSuivi, a.GereVariantes, a.SuiviDatePeremption,
                 a.PrixAchat, a.PrixVente, a.SeuilMinimum, a.EstActif,
@@ -60,6 +60,7 @@ public class ArticleService(IUnitOfWork uow) : IArticleService
             Designation = dto.Designation,
             Description = dto.Description,
             CodeBarre = dto.CodeBarre,
+            ImageUrl = dto.ImageUrl,
             FamilleId = dto.FamilleId,
             MarqueId = dto.MarqueId,
             UniteId = dto.UniteId,
@@ -92,6 +93,7 @@ public class ArticleService(IUnitOfWork uow) : IArticleService
         article.Designation = dto.Designation;
         article.Description = dto.Description;
         article.CodeBarre = dto.CodeBarre;
+        article.ImageUrl = dto.ImageUrl;
         article.FamilleId = dto.FamilleId;
         article.MarqueId = dto.MarqueId;
         article.UniteId = dto.UniteId;
