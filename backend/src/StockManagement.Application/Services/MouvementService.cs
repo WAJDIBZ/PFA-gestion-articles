@@ -86,6 +86,7 @@ public class MouvementService(IUnitOfWork uow, ICurrentUserService currentUser, 
         }
 
         var stockItem = await uow.StockItems.TrouverAsync(dto.ArticleId, dto.ArticleVarianteId, dto.DepotDestinationId, lotId, ct);
+        var estNouveauStockItem = stockItem is null;
         if (stockItem is null)
         {
             stockItem = new StockItem { ArticleId = dto.ArticleId, ArticleVarianteId = dto.ArticleVarianteId, DepotId = dto.DepotDestinationId, LotId = lotId, Quantite = 0 };
@@ -93,7 +94,7 @@ public class MouvementService(IUnitOfWork uow, ICurrentUserService currentUser, 
         }
         stockItem.Quantite += dto.Quantite;
         stockItem.DateModification = DateTime.UtcNow;
-        uow.StockItems.Update(stockItem);
+        if (!estNouveauStockItem) uow.StockItems.Update(stockItem);
 
         var mouvement = new MouvementStock
         {
@@ -186,6 +187,7 @@ public class MouvementService(IUnitOfWork uow, ICurrentUserService currentUser, 
         uow.StockItems.Update(stockSource);
 
         var stockDestination = await uow.StockItems.TrouverAsync(dto.ArticleId, dto.ArticleVarianteId, dto.DepotDestinationId, dto.LotId, ct);
+        var estNouveauStockDestination = stockDestination is null;
         if (stockDestination is null)
         {
             stockDestination = new StockItem { ArticleId = dto.ArticleId, ArticleVarianteId = dto.ArticleVarianteId, DepotId = dto.DepotDestinationId, LotId = dto.LotId, Quantite = 0 };
@@ -193,7 +195,7 @@ public class MouvementService(IUnitOfWork uow, ICurrentUserService currentUser, 
         }
         stockDestination.Quantite += dto.Quantite;
         stockDestination.DateModification = DateTime.UtcNow;
-        uow.StockItems.Update(stockDestination);
+        if (!estNouveauStockDestination) uow.StockItems.Update(stockDestination);
 
         var mouvementLieId = Guid.NewGuid();
         var utilisateurId = currentUser.UtilisateurId ?? Guid.Empty;

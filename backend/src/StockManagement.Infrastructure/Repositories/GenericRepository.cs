@@ -16,7 +16,13 @@ public class GenericRepository<T>(AppDbContext context) : IGenericRepository<T> 
 
     public async Task AddAsync(T entity, CancellationToken ct = default) => await Set.AddAsync(entity, ct);
 
-    public void Update(T entity) => Set.Update(entity);
+    /// <summary>Marque l'entité comme modifiée, sauf si elle est déjà suivie comme nouvellement ajoutée
+    /// (évite de transformer un INSERT en UPDATE, ce qui provoquerait une DbUpdateConcurrencyException).</summary>
+    public void Update(T entity)
+    {
+        if (context.Entry(entity).State == EntityState.Added) return;
+        Set.Update(entity);
+    }
 
     public void Remove(T entity) => Set.Remove(entity);
 }

@@ -288,3 +288,138 @@ a {
   flex-shrink: 0;
   font-size: 0.95rem;
 }
+
+/* ---------- Cartes articles (catalogue) ---------- */
+
+.sg-article-card {
+  background: var(--sg-surface);
+  border: 1px solid var(--sg-border);
+  border-radius: var(--sg-radius);
+  overflow: hidden;
+  box-shadow: var(--sg-shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sg-article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sg-shadow-md);
+}
+
+.sg-article-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: linear-gradient(135deg, #eef0fb, #e6f7fb);
+}
+
+.sg-article-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.05) contrast(1.02);
+  transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+.sg-article-card:hover .sg-article-media img {
+  transform: scale(1.08);
+}
+
+.sg-article-media.est-inactif img {
+  filter: grayscale(0.85) brightness(0.9);
+}
+
+.sg-article-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--sg-primary-light);
+  background: linear-gradient(135deg, #eef0fb, #e6f7fb);
+}
+
+.sg-article-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(10, 10, 25, 0.55) 0%, rgba(10, 10, 25, 0) 45%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.sg-article-card:hover .sg-article-overlay {
+  opacity: 1;
+}
+
+.sg-article-ribbon {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.sg-article-famille {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  color: #1f2430;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+}
+
+.sg-article-body {
+  padding: 0.9rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.sg-article-ref {
+  font-size: 0.72rem;
+  color: var(--sg-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.sg-article-title {
+  font-weight: 700;
+  margin: 0.15rem 0 0.5rem;
+  line-height: 1.25;
+}
+
+.sg-article-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--sg-border);
+}
+
+.sg-article-price {
+  font-weight: 700;
+  color: var(--sg-primary);
+}
+
+.sg-filter-bar {
+  background: var(--sg-surface);
+  border: 1px solid var(--sg-border);
+  border-radius: var(--sg-radius);
+  padding: 0.9rem 1rem;
+  box-shadow: var(--sg-shadow-sm);
+}

@@ -185,6 +185,7 @@ public static class DataSeeder
 
         AjouterStock(sac, null, depotSfax, 22);
 
+        foreach (var item in stockItemsAAjouter) await uow.StockItems.AddAsync(item);
         foreach (var m in mouvements) await uow.Mouvements.AddAsync(m);
 
         // Quelques mouvements supplémentaires pour illustrer l'historique (sortie + transfert)

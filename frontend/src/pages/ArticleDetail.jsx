@@ -74,33 +74,51 @@ export default function ArticleDetail() {
       <Link to="/articles" className="btn btn-link ps-0">
         &larr; Retour aux articles
       </Link>
-      <h3 className="mb-1">{article.designation}</h3>
-      <p className="text-muted">
-        Réf: {article.reference} • Famille: {article.familleNom} • Unité:{" "}
-        {article.uniteNom}
-      </p>
+
+      <div className="sg-card overflow-hidden mb-4">
+        <div className="row g-0">
+          <div className="col-md-4">
+            <div className={`sg-article-media ${!article.estActif ? "est-inactif" : ""}`} style={{ aspectRatio: "auto", height: "100%", minHeight: 220 }}>
+              {article.imageUrl ? (
+                <img src={article.imageUrl} alt={article.designation} />
+              ) : (
+                <div className="sg-article-placeholder"><i className="bi bi-image"></i></div>
+              )}
+              <span className="sg-article-famille">{article.familleNom}</span>
+            </div>
+          </div>
+          <div className="col-md-8 p-4">
+            <div className="sg-article-ref">{article.reference}</div>
+            <h3 className="fw-bold mb-2">{article.designation}</h3>
+            <p className="text-muted mb-2">{article.description || "Aucune description."}</p>
+            <p className="text-muted mb-0">
+              Unité : {article.uniteNom}{article.marqueNom ? ` \u2022 Marque : ${article.marqueNom}` : ""}
+            </p>
+          </div>
+        </div>
+      </div>
 
       <div className="row g-3 mb-4">
         <div className="col-md-3">
-          <div className="card card-body text-center">
-            <small>Quantité totale</small>
-            <h4>{article.quantiteTotale}</h4>
+          <div className="sg-card p-3 text-center">
+            <small className="text-muted">Quantité totale</small>
+            <h4 className="mb-0 mt-1">{article.quantiteTotale}</h4>
           </div>
         </div>
         <div className="col-md-3">
-          <div className="card card-body text-center">
+          <div className="sg-card p-3 text-center">
             <small>Seuil minimum</small>
             <h4>{article.seuilMinimum}</h4>
           </div>
         </div>
         <div className="col-md-3">
-          <div className="card card-body text-center">
+          <div className="sg-card p-3 text-center">
             <small>Prix d'achat</small>
             <h4>{article.prixAchat} DT</h4>
           </div>
         </div>
         <div className="col-md-3">
-          <div className="card card-body text-center">
+          <div className="sg-card p-3 text-center">
             <small>Prix de vente</small>
             <h4>{article.prixVente} DT</h4>
           </div>
