@@ -254,7 +254,7 @@ public static class DataSeeder
         Reference = reference,
         Designation = designation,
         Description = description,
-        ImageUrl = imageSeed is null ? null : $"https://picsum.photos/seed/{imageSeed}/600/450",
+        ImageUrl = imageSeed is null ? null : ImageParDefaut,
         FamilleId = famille.Id,
         MarqueId = marque.Id,
         UniteId = unite.Id,
@@ -265,6 +265,8 @@ public static class DataSeeder
         PrixVente = prixVente,
         SeuilMinimum = seuilMinimum
     };
+
+    private const string ImageParDefaut = "https://th.bing.com/th/id/R.c5209bbde8db4c412ed89da0e9425664?rik=uA%2f7OX9tqKMfxQ&pid=ImgRaw&r=0";
 
     private static ArticleVariante NouvelleVariante(Article article, string referenceVariante, params ValeurAttribut[] valeurs)
     {

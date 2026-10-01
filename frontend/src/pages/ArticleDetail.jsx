@@ -78,11 +78,16 @@ export default function ArticleDetail() {
       <div className="sg-card overflow-hidden mb-4">
         <div className="row g-0">
           <div className="col-md-4">
-            <div className={`sg-article-media ${!article.estActif ? "est-inactif" : ""}`} style={{ aspectRatio: "auto", height: "100%", minHeight: 220 }}>
+            <div
+              className={`sg-article-media ${!article.estActif ? "est-inactif" : ""}`}
+              style={{ aspectRatio: "auto", height: "100%", minHeight: 220 }}
+            >
               {article.imageUrl ? (
                 <img src={article.imageUrl} alt={article.designation} />
               ) : (
-                <div className="sg-article-placeholder"><i className="bi bi-image"></i></div>
+                <div className="sg-article-placeholder">
+                  <i className="bi bi-image"></i>
+                </div>
               )}
               <span className="sg-article-famille">{article.familleNom}</span>
             </div>
@@ -90,9 +95,12 @@ export default function ArticleDetail() {
           <div className="col-md-8 p-4">
             <div className="sg-article-ref">{article.reference}</div>
             <h3 className="fw-bold mb-2">{article.designation}</h3>
-            <p className="text-muted mb-2">{article.description || "Aucune description."}</p>
+            <p className="text-muted mb-2">
+              {article.description || "Aucune description."}
+            </p>
             <p className="text-muted mb-0">
-              Unité : {article.uniteNom}{article.marqueNom ? ` \u2022 Marque : ${article.marqueNom}` : ""}
+              Unité : {article.uniteNom}
+              {article.marqueNom ? ` \u2022 Marque : ${article.marqueNom}` : ""}
             </p>
           </div>
         </div>
